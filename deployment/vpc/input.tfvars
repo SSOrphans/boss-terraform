@@ -12,13 +12,13 @@ public_subnets = {
   public_sub1 = {
     cidr_block              = "10.0.1.0/24"
     map_public_ip_on_launch = true
-    availability_zone       = "us-west-1a"
+    availability_zone       = "us-east-2a"
     tag_name                = "boss-sub-public1"
   },
   public_sub2 = {
     cidr_block              = "10.0.2.0/24"
     map_public_ip_on_launch = true
-    availability_zone       = "us-west-1b"
+    availability_zone       = "us-east-2b"
     tag_name                = "boss-sub-public2"
   }
 }
