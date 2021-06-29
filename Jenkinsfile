@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Terraform Init') {
             steps {
-                dir('deployment/vpc') {
+                dir('deployment/base-infrastructure') {
                     echo 'Terraform Init'
                     sh 'terraform init -backend-config=backend.hcl'
                 }
@@ -21,9 +21,9 @@ pipeline {
         }
         stage('Terraform Apply') {
             steps {
-                dir('deployment/vpc') {
+                dir('deployment/base-infrastructure') {
                     echo 'Terraform Apply'
-                    sh 'terraform apply -var-file=input.tfvars -auto-approve'
+                    sh 'terraform apply -auto-approve'
                 }
             }
         }
