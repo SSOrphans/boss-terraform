@@ -8,7 +8,7 @@ pipeline {
         stage('Git Checkout') {
             steps {
                 echo 'Git Checkout'
-                git branch: 'dev', url: 'https://github.com/SSOrphans/boss-terraform'
+                git branch: 'feature/SSOR-266-Terraform_Infrastructure_Orchestration', url: 'https://github.com/SSOrphans/boss-terraform'
             }
         }
         stage('Terraform Init') {
