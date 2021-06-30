@@ -30,6 +30,10 @@ pipeline {
     }
     post { 
         always { 
+            dir('deployment/base-infrastructure') {
+                echo 'Terraform Destroy'
+                sh 'terraform destroy -auto-approve'
+            }
             cleanWs()
         }
     }
