@@ -1,8 +1,15 @@
 bucket_info = {
-  bucket_name = "boss-public-ui"
-  acl         = "public-read"
-  tag_name    = "public-ui"
+  public_ui = {
+    bucket_name = "boss-ssor-public"
+    tag_name    = "public-ui-portal"
+  },
+  admin_ui = {
+    bucket_name = "boss-ssor-admin"
+    tag_name    = "admin-ui-portal"
+  }
 }
+
+bucket_acl = "public-read"
 
 bucket_static_web = {
   index_doc = "index.html"
@@ -20,7 +27,6 @@ bucket_policy = {
 bucket_cors = {
   headers = ["*"]
   methods = ["GET", "PUT", "POST", "DELETE"]
-  origins = ["www.boss-ssor.s3-website-us-west-1.amazonaws.com"]
   expose  = ["ETag"]
   age     = 1800
 }

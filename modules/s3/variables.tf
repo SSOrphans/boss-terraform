@@ -1,10 +1,14 @@
 variable "bucket_info" {
-  type = object({
+  type = map(object({
     bucket_name = string
-    acl         = string
     tag_name    = string
-  })
-  description = "Name for s3 bucket to create and access control list"
+  }))
+  description = "Name for s3 bucket to create"
+}
+
+variable "bucket_acl" {
+  type = string
+  description = "Access control for s3 bucket"
 }
 
 variable "bucket_static_web" {
@@ -30,7 +34,6 @@ variable "bucket_cors" {
   type = object({
     headers = list(string)
     methods = list(string)
-    origins = list(string)
     expose  = list(string)
     age     = number
   })

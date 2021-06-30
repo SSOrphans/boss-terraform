@@ -1,3 +1,3 @@
 region = "us-east-2"
-bucket = "boss-tf"
+bucket = "boss-tf-states"
 key = "base-infrastructure.tfstate"

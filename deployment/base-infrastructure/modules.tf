@@ -4,6 +4,7 @@ module "s3" {
   bucket_static_web = var.bucket_static_web
   bucket_policy     = var.bucket_policy
   bucket_cors       = var.bucket_cors
+  bucket_acl        = var.bucket_acl
 }
 
 module "vpc" {
