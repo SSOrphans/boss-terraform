@@ -17,3 +17,82 @@ module "vpc" {
   security_group_info = var.security_group_info
   sg_ingress_traffic  = var.sg_ingress_traffic
 }
+
+module "ecr" {
+  source         = "../../modules/ecr"
+  ecr_repo_names = var.ecr_repo_names
+}
+
+module "alb" {
+  source  = "terraform-aws-modules/alb/aws"
+  version = "~> 6.0"
+
+  name = "boss-alb"
+
+  load_balancer_type = "application"
+
+  vpc_id          = module.vpc.vpc_id
+  subnets         = module.vpc.public_subnets_id
+  security_groups = [module.vpc.security_group_id]
+
+#### Temporary while setting up SSL ####
+  target_groups = [
+    {
+      name_prefix      = "pref-"
+      backend_protocol = "HTTP"
+      backend_port     = 80
+      target_type      = "ip"
+    }
+  ]
+
+  http_tcp_listeners = [
+    {
+      port               = 80
+      protocol           = "HTTP"
+      target_group_index = 0
+    }
+  ]
+#### End Temporary ####
+
+  ### To be used later when SSL is created
+  # target_groups = [
+  #   {
+  #     name_prefix      = "pref-"
+  #     backend_protocol = "HTTPS"
+  #     backend_port     = 443
+  #     target_type      = "instance"
+  #   }
+  # ]
+
+  # https_listeners = [
+  #   {
+  #     port                 = 443
+  #     protocol             = "HTTPS"
+  #     certificate_arn      = "arn:aws:iam::123456789012:server-certificate/test_cert-123456789012"
+  #     action_type          = "authenticate-cognito"
+  #     target_group_index   = 0
+  #     authenticate_cognito = {
+  #       user_pool_arn       = "arn:aws:cognito-idp::123456789012:userpool/test-pool"
+  #       user_pool_client_id = "6oRmFiS0JHk="
+  #       user_pool_domain    = "test-domain-com"
+  #     }
+  #   }
+  # ]
+
+  # http_tcp_listeners = [
+  #   {
+  #     port        = 80
+  #     protocol    = "HTTP"
+  #     action_type = "redirect"
+  #     redirect = {
+  #       port        = "443"
+  #       protocol    = "HTTPS"
+  #       status_code = "HTTP_301"
+  #     }
+  #   }
+  # ]
+
+  tags = {
+    Environment = "Test"
+  }
+}
