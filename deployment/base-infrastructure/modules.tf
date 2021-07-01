@@ -27,7 +27,7 @@ module "alb" {
   source  = "terraform-aws-modules/alb/aws"
   version = "~> 6.0"
 
-  name = "boss-alb"
+  name = var.alb_name
 
   load_balancer_type = "application"
 
@@ -38,7 +38,7 @@ module "alb" {
 #### Temporary while setting up SSL ####
   target_groups = [
     {
-      name_prefix      = "pref-"
+      name_prefix      = var.target_group_prefix
       backend_protocol = "HTTP"
       backend_port     = 80
       target_type      = "ip"
@@ -69,13 +69,7 @@ module "alb" {
   #     port                 = 443
   #     protocol             = "HTTPS"
   #     certificate_arn      = "arn:aws:iam::123456789012:server-certificate/test_cert-123456789012"
-  #     action_type          = "authenticate-cognito"
   #     target_group_index   = 0
-  #     authenticate_cognito = {
-  #       user_pool_arn       = "arn:aws:cognito-idp::123456789012:userpool/test-pool"
-  #       user_pool_client_id = "6oRmFiS0JHk="
-  #       user_pool_domain    = "test-domain-com"
-  #     }
   #   }
   # ]
 
