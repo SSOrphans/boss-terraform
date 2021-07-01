@@ -8,7 +8,7 @@ pipeline {
         stage('Git Checkout') {
             steps {
                 echo 'Git Checkout'
-                git branch: 'feature/SSOR-266-Terraform_Infrastructure_Orchestration', url: 'https://github.com/SSOrphans/boss-terraform'
+                git branch: 'dev', url: 'https://github.com/SSOrphans/boss-terraform'
             }
         }
         stage('Terraform Init') {
@@ -29,11 +29,7 @@ pipeline {
         }
     }
     post { 
-        always { 
-            dir('deployment/base-infrastructure') {
-                echo 'Terraform Destroy'
-                sh 'terraform destroy -auto-approve'
-            }
+        cleanup {
             cleanWs()
         }
     }
