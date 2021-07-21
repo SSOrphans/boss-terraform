@@ -16,7 +16,9 @@ module "vpc" {
   rt_tag_names        = var.rt_tag_names
   security_group_info = var.security_group_info
   sg_ingress_traffic  = var.sg_ingress_traffic
-  eip                 = var.eip
+  eip_name            = var.eip_name
+  nat_gw_subnet_tag   = var.nat_gw_subnet_tag
+  aws_region          = var.aws_region
 }
 
 module "ecr" {

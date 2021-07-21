@@ -12,14 +12,16 @@ public_subnets = {
   public_sub1 = {
     cidr_block              = "10.0.1.0/24"
     map_public_ip_on_launch = true
-    availability_zone       = "us-east-2a"
-    tag_name                = "boss-sub-public1"
+    # availability_zone       = "us-east-2a"
+    availability_zone_suffix = "a"
+    tag_name                 = "boss-sub-public1"
   },
   public_sub2 = {
     cidr_block              = "10.0.2.0/24"
     map_public_ip_on_launch = true
-    availability_zone       = "us-east-2b"
-    tag_name                = "boss-sub-public2"
+    # availability_zone       = "us-east-2b"
+    availability_zone_suffix = "b"
+    tag_name                 = "boss-sub-public2"
   }
 }
 
@@ -57,7 +59,6 @@ sg_ingress_traffic = {
   }
 }
 
-eip = {
-  public_sub_tag_name = "boss-sub-public1"
-  tag_name            = "boss-nat-eip"
-}
+eip_name = "boss-nat-eip"
+
+nat_gw_subnet_tag = "boss-sub-public1"

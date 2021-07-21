@@ -16,10 +16,10 @@ variable "igw_info" {
 
 variable "public_subnets" {
   type = map(object({
-    cidr_block              = string
-    map_public_ip_on_launch = bool
-    availability_zone       = string
-    tag_name                = string
+    cidr_block               = string
+    map_public_ip_on_launch  = bool
+    availability_zone_suffix = string
+    tag_name                 = string
   }))
   description = "Public subnets for vpc"
 }
@@ -59,10 +59,17 @@ variable "sg_ingress_traffic" {
   description = "Allowed traffic for security group"
 }
 
-variable "eip" {
-  type = object({
-    public_sub_tag_name = string
-    tag_name            = string
-  })
-  description = "Tag name for the EIP and public subnet to place the EIP"
+variable "eip_name" {
+  type = string
+  description = "Tag name for the EIP and "
+}
+
+variable "nat_gw_subnet_tag" {
+  type = string
+  description = "Tag name of public subnet to place the nat gateway"
+}
+
+variable "aws_region" {
+  type = string
+  description = "Region inputs defined at ./region-inputs/"
 }
