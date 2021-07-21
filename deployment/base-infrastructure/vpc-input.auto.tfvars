@@ -59,5 +59,5 @@ sg_ingress_traffic = {
 
 eip = {
   public_sub_tag_name = "boss-sub-public1"
-  tag_name            = "ssor-eip"
+  tag_name            = "boss-nat-eip"
 }
