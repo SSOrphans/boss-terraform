@@ -58,3 +58,11 @@ variable "sg_ingress_traffic" {
   }))
   description = "Allowed traffic for security group"
 }
+
+variable "eip" {
+  type = object({
+    public_sub_tag_name = string
+    tag_name            = string
+  })
+  description = "Tag name for the EIP and public subnet to place the EIP"
+}
