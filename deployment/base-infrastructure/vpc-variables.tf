@@ -60,15 +60,16 @@ variable "sg_ingress_traffic" {
 }
 
 variable "eip_name" {
-  type = string
+  type        = string
   description = "Tag name for the EIP and "
 }
 
 variable "nat_gw_subnet_tag" {
-  type = string
+  type        = string
   description = "Tag name of public subnet to place the nat gateway"
 }
+
 variable "aws_region" {
-  type = string
+  type        = string
   description = "Region inputs defined at ./region-inputs/"
 }

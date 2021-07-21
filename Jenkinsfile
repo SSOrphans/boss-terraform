@@ -15,7 +15,7 @@ pipeline {
             steps {
                 dir('deployment/base-infrastructure') {
                     echo 'Terraform Init'
-                    sh 'terraform init -backend-config=backend-ohio.hcl'
+                    sh 'terraform init -backend-config=./backends/ohio.hcl'
                 }
             }
         }
