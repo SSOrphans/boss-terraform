@@ -7,6 +7,6 @@ variable "ecs_cluster_info" {
 }
 
 variable "ecs_task_execution_role_name" {
-  type = string
+  type        = string
   description = "Name for execution role (ECS CloudFormation template)"
 }
