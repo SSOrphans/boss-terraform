@@ -3,7 +3,7 @@ resource "aws_subnet" "public_subnets" {
   vpc_id                  = aws_vpc.vpc.id
   cidr_block              = each.value["cidr_block"]
   map_public_ip_on_launch = each.value["map_public_ip_on_launch"]
-  availability_zone       = "${var.aws_region}${each.value["availability_zone_suffix"]}"
+  availability_zone       = "${var.region}${each.value["availability_zone_suffix"]}"
   tags = {
     Name = each.value["tag_name"] == "" ? "public-subnet" : each.value["tag_name"]
   }

@@ -61,4 +61,7 @@ sg_ingress_traffic = {
 
 eip_name = "boss-nat-eip"
 
-nat_gw_subnet_tag = "boss-sub-public1"
+nat_gw_info = {
+  nat_gw_tag     = "boss-nat-gw"
+  public_sub_tag = "boss-sub-public1"
+}

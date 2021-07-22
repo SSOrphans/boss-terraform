@@ -9,7 +9,7 @@ variable "vpc_data_inputs" {
   description = "Tag names and listener port to filter data resource blocks"
 }
 
-variable "aws_region" {
+variable "region" {
   type        = string
   description = "Region inputs defined at ./region-inputs/"
 }

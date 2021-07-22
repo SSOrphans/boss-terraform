@@ -17,8 +17,8 @@ module "vpc" {
   security_group_info = var.security_group_info
   sg_ingress_traffic  = var.sg_ingress_traffic
   eip_name            = var.eip_name
-  nat_gw_subnet_tag   = var.nat_gw_subnet_tag
-  aws_region          = var.aws_region
+  nat_gw_info         = var.nat_gw_info
+  region              = var.region
 }
 
 module "ecr" {

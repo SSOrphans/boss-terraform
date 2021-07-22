@@ -11,7 +11,7 @@ variable "igw_info" {
     route_cidr_block = string
     tag_name         = string
   })
-  description = "Tag name and CIDR for route to IGW"
+  description = "Tag name and CIDR for route to igw"
 }
 
 variable "public_subnets" {
@@ -21,7 +21,7 @@ variable "public_subnets" {
     availability_zone_suffix = string
     tag_name                 = string
   }))
-  description = "Public subnets for VPC"
+  description = "Public subnets for vpc"
 }
 
 variable "private_subnets" {
@@ -29,7 +29,7 @@ variable "private_subnets" {
     cidr_block = string
     tag_name   = string
   }))
-  description = "Private subnets for VPC"
+  description = "Private subnets for vpc"
 }
 
 variable "rt_tag_names" {
@@ -64,12 +64,15 @@ variable "eip_name" {
   description = "Tag name for the EIP and "
 }
 
-variable "nat_gw_subnet_tag" {
-  type        = string
-  description = "Tag name of public subnet to place the nat gateway"
+variable "nat_gw_info" {
+  type = object({
+    nat_gw_tag     = string
+    public_sub_tag = string
+  })
+  description = "Tag name of the nat gateway and public subnet to place the nat gateway in"
 }
 
-variable "aws_region" {
+variable "region" {
   type        = string
   description = "Region inputs defined at ./region-inputs/"
 }
