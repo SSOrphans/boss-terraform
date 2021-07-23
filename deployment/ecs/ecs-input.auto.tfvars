@@ -1,5 +1,5 @@
 ecs_cluster_info = {
-  cluster_name  = "boss-cluster"
+  cluster_name  = "tf-cluster"
   setting_value = "disabled"
 }
 

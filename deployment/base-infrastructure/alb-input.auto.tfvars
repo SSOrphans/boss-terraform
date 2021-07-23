@@ -1,3 +1,3 @@
-alb_name = "boss-terraform-alb"
-target_group_prefix = "boss-"
+alb_name = "tf-alb"
+target_group_prefix = "tf-"
 certificate_arn = "test"

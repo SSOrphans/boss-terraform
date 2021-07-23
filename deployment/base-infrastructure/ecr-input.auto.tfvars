@@ -1,8 +1,8 @@
 ecr_repo_names = {
-  account     = "boss-account-repo",
-  card        = "boss-card-repo",
-  gateway     = "boss-gateway-repo",
-  transaction = "boss-transaction-repo",
-  user        = "boss-user-repo",
-  loan        = "boss-loan-repo"
+  account     = "tf-account-repo",
+  card        = "tf-card-repo",
+  gateway     = "tf-gateway-repo",
+  transaction = "tf-transaction-repo",
+  user        = "tf-user-repo",
+  loan        = "tf-loan-repo"
 }
