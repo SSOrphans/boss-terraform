@@ -52,9 +52,9 @@ Resources:
         AwsvpcConfiguration:
           AssignPublicIp: DISABLED
           Subnets:
-            - !Sub '{{resolve:secretsmanager:SOrphans/$${ApplicationEnvironment}:SecretString:Private-Subnet-A}}'
+            - !Sub '{{resolve:secretsmanager:SSOrphans/$${ApplicationEnvironment}:SecretString:Private-Subnet-A}}'
           SecurityGroups:
-            - !Sub '{{resolve:secretsmanager:SOrphans/$${ApplicationEnvironment}:SecretString:Base-SecGroup}}'
+            - !Sub '{{resolve:secretsmanager:SSOrphans/$${ApplicationEnvironment}:SecretString:Base-SecGroup}}'
       LoadBalancers:
         - ContainerName: !Ref ApplicationName
           ContainerPort: 8080
@@ -79,9 +79,9 @@ Resources:
             - ContainerPort: 8080
           # Secrets:
           #   - Name: DB_USERNAME
-          #     ValueFrom: !Sub '{{resolve:secretsmanager:SOrphans/$${ApplicationEnvironment}:SecretString:rds-user-secret-arn}}'
+          #     ValueFrom: !Sub '{{resolve:secretsmanager:SSOrphans/$${ApplicationEnvironment}:SecretString:rds-user-secret-arn}}'
           #   - Name: DB_PASSWORD
-          #     ValueFrom: !Sub '{{resolve:secretsmanager:SOrphans/$${ApplicationEnvironment}:SecretString:rds-password-secret-arn}}'
+          #     ValueFrom: !Sub '{{resolve:secretsmanager:SSOrphans/$${ApplicationEnvironment}:SecretString:rds-password-secret-arn}}'
           # Environment:
           #   - Name: APPLICATION_NAME
           #     Value: !Sub $${ApplicationName}
@@ -92,15 +92,15 @@ Resources:
           #   - Name: DB_HOST_URL
           #     Value: !Join
           #       - ''
-          #       - - !Sub 'jdbc:mysql://{{resolve:secretsmanager:SOrphans/$${ApplicationEnvironment}:SecretString:host}}'
-          #         - !Sub ':{{resolve:secretsmanager:SOrphans/$${ApplicationEnvironment}:SecretString:port}}'
-          #         - !Sub '/{{resolve:secretsmanager:SOrphans/$${ApplicationEnvironment}:SecretString:dbname}}'
+          #       - - !Sub 'jdbc:mysql://{{resolve:secretsmanager:SSOrphans/$${ApplicationEnvironment}:SecretString:host}}'
+          #         - !Sub ':{{resolve:secretsmanager:SSOrphans/$${ApplicationEnvironment}:SecretString:port}}'
+          #         - !Sub '/{{resolve:secretsmanager:SSOrphans/$${ApplicationEnvironment}:SecretString:dbname}}'
           Essential: true
           Memory: 2048
           LogConfiguration:
             LogDriver: awslogs
             Options:
-              awslogs-group: !Sub /ecs/SOrphans/$${ApplicationName}/$${ApplicationEnvironment}
+              awslogs-group: !Sub /ecs/SSOrphans/$${ApplicationName}/$${ApplicationEnvironment}
               awslogs-region: !Ref AWS::Region
               awslogs-stream-prefix: ecs
               awslogs-create-group: 'true'
@@ -122,7 +122,7 @@ Resources:
         - Key: deregistration_delay.timeout_seconds
           Value: '60'
       TargetType: ip
-      VpcId: !Sub '{{resolve:secretsmanager:SOrphans/$${ApplicationEnvironment}:SecretString:vpc-id}}'
+      VpcId: !Sub '{{resolve:secretsmanager:SSOrphans/$${ApplicationEnvironment}:SecretString:vpc-id}}'
 
   ApiListenerRule:
     Type: AWS::ElasticLoadBalancingV2::ListenerRule
@@ -135,7 +135,7 @@ Resources:
       Actions:
         - Type: forward
           TargetGroupArn: !Ref TargetGroup
-      ListenerArn: !Sub '{{resolve:secretsmanager:SOrphans/$${ApplicationEnvironment}:SecretString:listener-arn}}'
+      ListenerArn: !Sub '{{resolve:secretsmanager:SSOrphans/$${ApplicationEnvironment}:SecretString:listener-arn}}'
       Priority: 10
 ECS_YAML
 }
