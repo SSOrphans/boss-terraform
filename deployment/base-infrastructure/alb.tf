@@ -12,7 +12,7 @@ module "alb" {
   #### Temporary while setting up SSL ####
   target_groups = [
     {
-      name_prefix      = "ssor-"
+      name             = "ssor-tg"
       backend_protocol = "HTTP"
       backend_port     = 80
       target_type      = "ip"
@@ -59,11 +59,4 @@ module "alb" {
   #     }
   #   }
   # ]
-
-  tags = {
-    Environment = "Test"
-  }
 }
-
-
-
