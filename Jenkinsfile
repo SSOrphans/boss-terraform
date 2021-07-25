@@ -2,15 +2,8 @@ pipeline {
     agent any
     tools {
         terraform 'terraform'
-        git 'git'
     }
     stages {
-        stage('Git Checkout') {
-            steps {
-                echo 'Git Checkout'
-                git branch: 'afs-demo', url: 'https://github.com/SSOrphans/boss-terraform'
-            }
-        }
         stage('Base-infrastructure resources') {
             steps {
                 dir('deployment/base-infrastructure') {
