@@ -8,8 +8,4 @@ resource "aws_ecs_cluster" "cluster" {
     name  = "containerInsights"
     value = var.ecs_cluster_info.setting_value
   }
-
-  depends_on = [
-    aws_secretsmanager_secret_version.sm_sv_encode
-  ]
 }
