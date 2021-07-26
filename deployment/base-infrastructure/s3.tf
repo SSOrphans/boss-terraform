@@ -3,11 +3,11 @@ module "s3" {
 
   bucket_info = {
     public_ui = {
-      bucket_name = "ssor-public.bankofsmoothstack.com"
+      bucket_name = "www.bankofsmoothstack.com"
       tag_name    = "public-ui-portal"
     },
     admin_ui = {
-      bucket_name = "ssor-admin.bankofsmoothstack.com"
+      bucket_name = "admin.bankofsmoothstack.com"
       tag_name    = "admin-ui-portal"
     }
   }

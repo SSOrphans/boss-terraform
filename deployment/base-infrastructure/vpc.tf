@@ -13,14 +13,14 @@ module "vpc" {
 
   public_subnets = {
     public_sub1 = {
-      cidr_block              = "10.0.1.0/24"
+      cidr_block              = "172.31.1.0/24"
       map_public_ip_on_launch = true
       # availability_zone       = "us-east-2a"
       availability_zone_suffix = "a"
       tag_name                 = "ssor-sub-public1"
     },
     public_sub2 = {
-      cidr_block              = "10.0.2.0/24"
+      cidr_block              = "172.31.2.0/24"
       map_public_ip_on_launch = true
       # availability_zone       = "us-east-2b"
       availability_zone_suffix = "b"
@@ -30,7 +30,7 @@ module "vpc" {
 
   private_subnets = {
     private_sub1 = {
-      cidr_block = "10.0.3.0/24"
+      cidr_block = "10.0.1.0/24"
       tag_name   = "ssor-sub-private1"
     }
   }
@@ -59,15 +59,23 @@ module "vpc" {
       to_port     = 443
       protocol    = "tcp"
       cidr_block  = "0.0.0.0/0"
+    },
+    microservices = {
+      description = "ELB to microservices"
+      from_port   = 8080
+      to_port     = 8080
+      protocol    = "tcp"
+      cidr_block  = "10.0.0.0/16"
     }
   }
 
   eip_name = "ssor-nat-eip"
 
   nat_gw_info = {
-    nat_gw_tag     = "ssor-nat-gw"
-    public_sub_tag = "ssor-sub-public1"
+    route_cidr_block = "0.0.0.0/0"
+    nat_gw_tag       = "ssor-nat-gw"
+    public_sub_tag   = "ssor-sub-public1"
   }
-  
+
   region = var.region
 }

@@ -66,8 +66,9 @@ variable "eip_name" {
 
 variable "nat_gw_info" {
   type = object({
-    nat_gw_tag     = string
-    public_sub_tag = string
+    route_cidr_block = string
+    nat_gw_tag       = string
+    public_sub_tag   = string
   })
   description = "Tag name of the nat gateway and public subnet to place the nat gateway in"
 }

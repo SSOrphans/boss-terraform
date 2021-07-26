@@ -6,7 +6,7 @@ module "alb" {
   load_balancer_type = "application"
 
   vpc_id          = module.vpc.vpc_id
-  subnets         = module.vpc.public_subnets_id
+  subnets         = module.vpc.alb_subnets
   security_groups = [module.vpc.security_group_id]
 
   #### Temporary while setting up SSL ####
