@@ -15,7 +15,7 @@ pipeline {
             steps {
                 dir('deployment/base-infrastructure') {
                     echo 'Terraform Init'
-                    sh 'terraform init -backend-config=backend.hcl'
+                    sh 'terraform init -backend-config=./backends/ohio.hcl'
                 }
             }
         }
@@ -23,7 +23,7 @@ pipeline {
             steps {
                 dir('deployment/base-infrastructure') {
                     echo 'Terraform Apply'
-                    sh 'terraform apply -auto-approve'
+                    sh 'terraform apply -var-file=./region-inputs/ohio.tfvars -auto-approve'
                 }
             }
         }

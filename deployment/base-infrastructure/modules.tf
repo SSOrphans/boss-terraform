@@ -16,6 +16,9 @@ module "vpc" {
   rt_tag_names        = var.rt_tag_names
   security_group_info = var.security_group_info
   sg_ingress_traffic  = var.sg_ingress_traffic
+  eip_name            = var.eip_name
+  nat_gw_subnet_tag   = var.nat_gw_subnet_tag
+  aws_region          = var.aws_region
 }
 
 module "ecr" {
@@ -35,7 +38,7 @@ module "alb" {
   subnets         = module.vpc.public_subnets_id
   security_groups = [module.vpc.security_group_id]
 
-#### Temporary while setting up SSL ####
+  #### Temporary while setting up SSL ####
   target_groups = [
     {
       name_prefix      = var.target_group_prefix
@@ -52,7 +55,7 @@ module "alb" {
       target_group_index = 0
     }
   ]
-#### End Temporary ####
+  #### End Temporary ####
 
   ### To be used later when SSL is created
   # target_groups = [
@@ -68,7 +71,7 @@ module "alb" {
   #   {
   #     port                 = 443
   #     protocol             = "HTTPS"
-  #     certificate_arn      = "arn:aws:iam::123456789012:server-certificate/test_cert-123456789012"
+  #     certificate_arn      = ""
   #     target_group_index   = 0
   #   }
   # ]
