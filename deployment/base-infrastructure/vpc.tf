@@ -67,7 +67,7 @@ module "vpc" {
       from_port   = 8080
       to_port     = 8080
       protocol    = "tcp"
-      cidr_block  = "10.0.3.0/24"
+      cidr_block  = "10.0.0.0/16"
     }
   }
 
