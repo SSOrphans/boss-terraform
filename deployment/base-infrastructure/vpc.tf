@@ -13,14 +13,14 @@ module "vpc" {
 
   public_subnets = {
     public_sub1 = {
-      cidr_block              = "172.31.1.0/24"
+      cidr_block              = "10.0.1.0/24"
       map_public_ip_on_launch = true
       # availability_zone       = "us-east-2a"
       availability_zone_suffix = "a"
       tag_name                 = "ssor-sub-public1"
     },
     public_sub2 = {
-      cidr_block              = "172.31.2.0/24"
+      cidr_block              = "10.0.2.0/24"
       map_public_ip_on_launch = true
       # availability_zone       = "us-east-2b"
       availability_zone_suffix = "b"
@@ -30,7 +30,9 @@ module "vpc" {
 
   private_subnets = {
     private_sub1 = {
-      cidr_block = "10.0.1.0/24"
+      cidr_block = "10.0.3.0/24"
+      # availability_zone       = "us-east-2c"
+      availability_zone_suffix = "c"
       tag_name   = "ssor-sub-private1"
     }
   }
@@ -65,7 +67,7 @@ module "vpc" {
       from_port   = 8080
       to_port     = 8080
       protocol    = "tcp"
-      cidr_block  = "10.0.0.0/16"
+      cidr_block  = "10.0.3.0/24"
     }
   }
 

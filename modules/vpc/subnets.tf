@@ -10,9 +10,10 @@ resource "aws_subnet" "public_subnets" {
 }
 
 resource "aws_subnet" "private_subnets" {
-  for_each   = var.private_subnets
-  vpc_id     = aws_vpc.vpc.id
-  cidr_block = each.value["cidr_block"]
+  for_each          = var.private_subnets
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = each.value["cidr_block"]
+  availability_zone = "${var.region}${each.value["availability_zone_suffix"]}"
   tags = {
     Name = each.value["tag_name"] == "" ? "private-subnet" : each.value["tag_name"]
   }
