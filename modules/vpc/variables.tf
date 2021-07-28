@@ -27,6 +27,7 @@ variable "public_subnets" {
 variable "private_subnets" {
   type = map(object({
     cidr_block = string
+    availability_zone_suffix = string
     tag_name   = string
   }))
   description = "Private subnets for vpc"
@@ -64,12 +65,16 @@ variable "eip_name" {
   description = "Tag name for the EIP and "
 }
 
-variable "nat_gw_subnet_tag" {
-  type        = string
-  description = "Tag name of public subnet to place the nat gateway"
+variable "nat_gw_info" {
+  type = object({
+    route_cidr_block = string
+    nat_gw_tag       = string
+    public_sub_tag   = string
+  })
+  description = "Tag name of the nat gateway and public subnet to place the nat gateway in"
 }
 
-variable "aws_region" {
+variable "region" {
   type        = string
   description = "Region inputs defined at ./region-inputs/"
 }
