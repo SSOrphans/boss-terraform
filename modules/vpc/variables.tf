@@ -27,10 +27,7 @@ variable "public_subnets" {
 variable "private_subnets" {
   type = map(object({
     cidr_block = string
-<<<<<<< HEAD
     availability_zone_suffix = string
-=======
->>>>>>> dev
     tag_name   = string
   }))
   description = "Private subnets for vpc"
