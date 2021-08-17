@@ -17,6 +17,10 @@ resource "aws_route_table_association" "public_rt_association" {
 
 resource "aws_route_table" "private_route_table" {
   vpc_id = aws_vpc.vpc.id
+  route {
+    cidr_block = var.nat_gw_info.route_cidr_block
+    nat_gateway_id = aws_nat_gateway.nat.id
+  }
   tags = {
     Name = var.rt_tag_names.private_rt_name
   }

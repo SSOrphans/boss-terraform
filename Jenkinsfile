@@ -2,33 +2,30 @@ pipeline {
     agent any
     tools {
         terraform 'terraform'
-        git 'git'
     }
     stages {
-        stage('Git Checkout') {
-            steps {
-                echo 'Git Checkout'
-                git branch: 'dev', url: 'https://github.com/SSOrphans/boss-terraform'
-            }
-        }
-        stage('Terraform Init') {
+        stage('Base-infrastructure resources') {
             steps {
                 dir('deployment/base-infrastructure') {
-                    echo 'Terraform Init'
+                    echo 'Init base-infrastructure remote state'
                     sh 'terraform init -backend-config=./backends/ohio.hcl'
+                    echo 'Provision base-infrastructure resources'
+                    sh 'terraform apply -var-file=./region-inputs/ohio.tfvars -auto-approve'
                 }
             }
         }
-        stage('Terraform Apply') {
+        stage('ECS resources') {
             steps {
-                dir('deployment/base-infrastructure') {
-                    echo 'Terraform Apply'
+                dir('deployment/ecs') {
+                    echo 'Init ECS remote state'
+                    sh 'terraform init -backend-config=./backends/ohio.hcl'
+                    echo 'Provision ECS resources'
                     sh 'terraform apply -var-file=./region-inputs/ohio.tfvars -auto-approve'
                 }
             }
         }
     }
-    post { 
+    post {
         cleanup {
             cleanWs()
         }
