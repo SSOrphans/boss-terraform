@@ -19,16 +19,16 @@ variable "public_subnets" {
     cidr_block               = string
     map_public_ip_on_launch  = bool
     availability_zone_suffix = string
-    tag_name                 = string
+    tags                     = map(string)
   }))
   description = "Public subnets for vpc"
 }
 
 variable "private_subnets" {
   type = map(object({
-    cidr_block = string
+    cidr_block               = string
     availability_zone_suffix = string
-    tag_name   = string
+    tags                     = map(string)
   }))
   description = "Private subnets for vpc"
 }
@@ -69,7 +69,6 @@ variable "nat_gw_info" {
   type = object({
     route_cidr_block = string
     nat_gw_tag       = string
-    public_sub_tag   = string
   })
   description = "Tag name of the nat gateway and public subnet to place the nat gateway in"
 }

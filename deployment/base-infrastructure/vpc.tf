@@ -15,25 +15,39 @@ module "vpc" {
     public_sub1 = {
       cidr_block               = "10.0.1.0/24"
       map_public_ip_on_launch  = true
-      # availability_zone        = "us-east-2a"
       availability_zone_suffix = "a"
-      tag_name                 = "ssor-sub-public1"
+      tags = {
+        "kubernetes.io/role/elb" = 1
+        Name                     = "ssor-sub-public1"
+      }
     },
     public_sub2 = {
       cidr_block               = "10.0.2.0/24"
       map_public_ip_on_launch  = true
-      # availability_zone        = "us-east-2b"
       availability_zone_suffix = "b"
-      tag_name                 = "ssor-sub-public2"
+      tags = {
+        "kubernetes.io/role/elb" = 1
+        Name                     = "ssor-sub-public2"
+      }
     }
   }
 
   private_subnets = {
     private_sub1 = {
       cidr_block               = "10.0.3.0/24"
-      # availability_zone        = "us-east-2c"
-      availability_zone_suffix = "c"
-      tag_name                 = "ssor-sub-private1"
+      availability_zone_suffix = "a"
+      tags = {
+        "kubernetes.io/role/internal-elb" = 1
+        Name                              = "ssor-sub-private1"
+      }
+    }
+    private_sub2 = {
+      cidr_block               = "10.0.4.0/24"
+      availability_zone_suffix = "b"
+      tags = {
+        "kubernetes.io/role/internal-elb" = 1
+        Name                              = "ssor-sub-private2"
+      }
     }
   }
 
@@ -76,7 +90,6 @@ module "vpc" {
   nat_gw_info = {
     route_cidr_block = "0.0.0.0/0"
     nat_gw_tag       = "ssor-nat-gw"
-    public_sub_tag   = "ssor-sub-public1"
   }
 
   region = var.region

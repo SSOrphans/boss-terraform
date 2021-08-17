@@ -11,7 +11,7 @@ output "private_subnets_id" {
 }
 
 output "alb_subnets" {
-  value = concat([for subnet in aws_subnet.private_subnets : subnet.id], [for subnet in aws_subnet.public_subnets : subnet.id])
+  value = [for subnet in aws_subnet.public_subnets : subnet.id]
 }
 
 output "security_group_id" {

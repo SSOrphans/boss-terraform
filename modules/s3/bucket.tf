@@ -30,6 +30,11 @@ POLICY
     max_age_seconds = var.bucket_cors.age
   }
 
+  provisioner "local-exec" {
+    when    = destroy
+    command = "aws s3 rm s3://${self.bucket} --recursive"
+  }
+
   tags = {
     Name = each.value["tag_name"]
   }
