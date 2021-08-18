@@ -1,6 +1,4 @@
 resource "aws_vpc" "vpc" {
-  cidr_block = var.vpc_info.cidr_block
-  tags = {
-    Name = var.vpc_info.tag_name
-  }
+  cidr_block = var.cidr_block
+  tags = var.tags
 }

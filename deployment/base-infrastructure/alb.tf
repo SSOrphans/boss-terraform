@@ -5,9 +5,9 @@ module "alb" {
   name               = "ssor-alb"
   load_balancer_type = "application"
 
-  vpc_id          = module.vpc.vpc_id
-  subnets         = module.vpc.alb_subnets
-  security_groups = [module.vpc.security_group_id]
+  vpc_id          = module.vpc.id
+  subnets         = module.subnet.public_subnets_id
+  security_groups = [module.security_group.id]
 
   target_groups = [
     {

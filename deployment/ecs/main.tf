@@ -4,7 +4,7 @@ module "ecs" {
   ecs_task_execution_role_name = "ecs-task-execute-role"
 
   ecs_cluster_info = {
-    cluster_name  = "ssor-cluster"
+    cluster_name  = "ssor-ecs-cluster"
     setting_value = "disabled"
   }
 

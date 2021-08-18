@@ -1,7 +1,5 @@
-resource "aws_security_group" "security_group" {
-  name        = var.security_group_info.sg_name
-  description = var.security_group_info.sg_description
-  vpc_id      = aws_vpc.vpc.id
+resource "aws_security_group" "sg" {
+  vpc_id      = var.vpc_id
 
   dynamic "ingress" {
     for_each = var.sg_ingress_traffic
@@ -21,7 +19,5 @@ resource "aws_security_group" "security_group" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = {
-    Name = var.security_group_info.sg_name
-  }
+  tags = var.tags
 }
